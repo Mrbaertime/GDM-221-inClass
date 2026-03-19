@@ -22,6 +22,8 @@ public static GameManager I { get; private set; }
     // default spawn point
     public Vector3 RespawnPoint { get; private set; }
 
+    [SerializeField] private InterstitialAdController interstitialAdController;
+
     void Awake()
     {
         if (I != null && I != this) { Destroy(gameObject); return; }
@@ -82,6 +84,11 @@ public static GameManager I { get; private set; }
         {
             player.SetControlEnabled(false);
             player.StopMotion();
+        }
+
+        if (interstitialAdController != null)
+        {
+            interstitialAdController.ShowInterstitial();
         }
 
         StartCoroutine(CoRespawn());
